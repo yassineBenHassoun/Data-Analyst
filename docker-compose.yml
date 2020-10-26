@@ -1,0 +1,19 @@
+version: "3.3"
+
+services:
+  db:
+    image: mysql
+    ports:
+      - 3306:3306
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  jupyter:
+    build: ./docker/images/jupyter
+    volumes:
+      - $PWD/lab:/lab
+    environment:
+      - PASSWORD=baki93
+      - JUPYTER_TOKEN=easy
+    ports:
+      - 8888:8888
